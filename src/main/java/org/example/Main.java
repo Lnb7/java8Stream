@@ -29,9 +29,10 @@ public class Main {
         Long max = employees.stream().map(e -> e.getSalary()).max(Long::compare).get();
         System.out.println("height salary of the employee is : " + max);
 
+        // name of the employee get max salary
         System.out.println("----------------------------------------------------------------------->");
-        Stream<String> stringStream = employees.stream().filter(e -> e.getSalary() == max).map(Employee::getName);
-        stringStream.forEach( e-> System.out.println("Name of employee has max salary : " + e));
+        Stream<String> maxSalaryWithName = employees.stream().filter(e -> e.getSalary() == max).map(Employee::getName);
+        maxSalaryWithName.forEach( e-> System.out.println("Name of employee has max salary : " + e));
 
         System.out.println("----------------------------------------------------------------------->");
         // lowest salary of the employee

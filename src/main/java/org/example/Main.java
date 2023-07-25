@@ -2,22 +2,19 @@ package org.example;
 
 import org.example.model.Employee;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
     public static List<Employee> loadData(){
         List<Employee> employees = Arrays.asList(
-                new Employee("Joydeep","Architect",45,180),
-                new Employee("Bimolesh","Architect",49,200),
-                new Employee("Avishek","Senior",35,120),
-                new Employee("Amitava","Mid",33,100),
-                new Employee("Anirban","Jounior",30,90),
-                new Employee("Loknath","Jounior",27,90)
+                new Employee("Joydeep","Architect",45,180,"New York"),
+                new Employee("Bimolesh","Architect",49,200,"San Francisco"),
+                new Employee("Avishek","Senior",35,120,"New York"),
+                new Employee("Amitava","Mid",33,100,"San Francisco"),
+                new Employee("Anirban","Jounior",30,90,"New York"),
+                new Employee("Loknath","Jounior",27,90,"New York")
         );
         return employees;
     }
@@ -70,5 +67,16 @@ public class Main {
         Map<String, Double> averageSalaryDepartmentWish = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)));
         averageSalaryDepartmentWish.forEach((dept,avg) -> System.out.println(dept + ":" + avg));
 
+        System.out.println("----------------------------------------------------------------------->");
+        // department wish sum salary
+        Map<String, Double> sumSalaryDepartmentWish = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.summingDouble(Employee::getSalary)));
+        sumSalaryDepartmentWish.forEach((dept, sum) -> System.out.println(dept + ":" + sum));
+
+        System.out.println("----------------------------------------------------------------------->");
+        Map<String, Map<String, Double>> sumSalaryDepartmentAndCityWish = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.groupingBy(Employee::getCity, Collectors.summingDouble(Employee::getSalary))));
+        sumSalaryDepartmentAndCityWish.forEach((dept, citySal) -> {
+            System.out.println("--> Department : " + dept);
+            citySal.forEach((city,sal) -> System.out.println("city : " + city +" : " + " sumSalary : " + sal ));
+        });
     }
 }

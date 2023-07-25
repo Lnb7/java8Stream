@@ -7,14 +7,17 @@ public class Employee {
 
     private long salary;
 
+    private String city;
+
     public Employee() {
     }
 
-    public Employee(String name, String department, int age, long salary) {
+    public Employee(String name, String department, int age, long salary,String city) {
         this.name = name;
         this.department = department;
         this.age = age;
         this.salary = salary;
+        this.city = city;
     }
 
     public String getName() {
@@ -47,5 +50,13 @@ public class Employee {
 
     public void setSalary(long salary) {
         this.salary = salary;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
